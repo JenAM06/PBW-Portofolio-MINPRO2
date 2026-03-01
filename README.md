@@ -22,7 +22,7 @@ Portfolio website pribadi. Menampilkan informasi profil, skill, pengalaman, dan 
   - [3. About Me](#3-about-me)
   - [4. Certificates](#4-certificates)
   - [5. Footer](#5-footer)
-- [CSS Global](#css)
+- [CSS](#css)
 - [Vue.js Data & Konfigurasi](#vuejs-data--konfigurasi)
   
 
@@ -588,7 +588,7 @@ Breakpoint kustom untuk tampilan rapi di layar tablet dan mobile.
 
 ## Vue.js Data & Konfigurasi
 
-Semua konten yang tampil di halaman diambil dari satu tempat — bagian `data()` di dalam script Vue. Untuk mengubah isi portfolio, cukup edit nilai-nilai di sini tanpa perlu menyentuh struktur HTML sama sekali.
+Semua konten yang tampil di halaman diambil dari satu tempat bagian `data()` di dalam script Vue. Untuk mengubah isi portfolio, cukup edit nilai-nilai di sini tanpa perlu menyentuh struktur HTML sama sekali.
 
 <details>
 <summary>Penjelasan Kode Vue Data</summary>
