@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio | Jen Agresia</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div id="app">
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm bg-white">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#home">{{ name }}</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false"
+              aria-label="Open navigation menu" title="Open navigation menu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav gap-2">
+          <li class="nav-item" v-for="link in navLinks" :key="link.href">
+            <a class="nav-link nav-link-custom" :href="link.href">{{ link.label }}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== HOME / HERO ===== -->
+  <section id="home" class="hero-section d-flex align-items-center">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6 order-2 order-lg-1">
+          <p class="text-muted mb-1 small text-uppercase letter-spacing">Hi! I'm</p>
+          <h1 class="hero-title mb-3">{{ name }}</h1>
+          <h4 class="hero-subtitle mb-4">{{ title }}</h4>
+          <p class="hero-desc text-muted mb-5">{{ heroDesc }}</p>
+          <div class="d-flex gap-3 flex-wrap">
+            <a href="#about" class="btn btn-primary-custom">About Me</a>
+            <a href="#certificates" class="btn btn-outline-custom">View Certificates</a>
+          </div>
+        </div>
+        <div class="col-lg-6 order-1 order-lg-2 text-center">
+          <div class="hero-img-wrapper">
+            <img src="aset/profil.jpeg"
+                 alt="Profile Photo of Jen Agresia"
+                 title="Profile Photo of Jen Agresia"
+                 class="hero-img" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT ME ===== -->
+  <section id="about" class="section-padding bg-light-custom">
+    <div class="container">
+      <div class="section-header text-center mb-5">
+        <h2 class="section-title">About Me</h2>
+        <div class="title-underline mx-auto"></div>
+      </div>
+
+      <div class="row g-5 align-items-start">
+
+        <!-- Left: Description + Skills -->
+        <div class="col-lg-6">
+          <h5 class="fw-semibold mb-3">Who Am I?</h5>
+          <p class="text-muted lh-lg mb-5">{{ aboutDesc }}</p>
+
+          <h5 class="fw-semibold mb-4">My Skills</h5>
+          <div v-for="skill in skills" :key="skill.name" class="mb-3">
+            <div class="d-flex justify-content-between mb-1">
+              <span class="small fw-medium">{{ skill.name }}</span>
+              <span class="small text-muted">{{ skill.level }}%</span>
+            </div>
+            <div class="progress progress-custom"
+                 role="progressbar"
+                 :aria-valuenow="skill.level"
+                 aria-valuemin="0"
+                 aria-valuemax="100"
+                 :aria-label="skill.name + ' skill level: ' + skill.level + ' percent'"
+                 :title="skill.name + ': ' + skill.level + '%'">
+              <div class="progress-bar progress-bar-custom"
+                   :style="{ width: skill.level + '%' }"
+                   aria-hidden="true">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Experience Scrollable -->
+        <div class="col-lg-6">
+          <h5 class="fw-semibold mb-4">Experience</h5>
+          <div class="experience-scroll">
+            <div v-for="exp in experiences" :key="exp.role" class="experience-card mb-3 p-3">
+              <div class="d-flex justify-content-between align-items-start">
+                <div>
+                  <p class="mb-0 fw-semibold">{{ exp.role }}</p>
+                  <p class="mb-0 small text-muted">{{ exp.company }}</p>
+                </div>
+                <span class="badge-period">{{ exp.period }}</span>
+              </div>
+              <p class="mt-2 mb-0 small text-muted">{{ exp.desc }}</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CERTIFICATES ===== -->
+  <section id="certificates" class="section-padding">
+    <div class="container">
+      <div class="section-header text-center mb-5">
+        <h2 class="section-title">Certificates</h2>
+        <div class="title-underline mx-auto"></div>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4" v-for="cert in certificates" :key="cert.title">
+          <div class="cert-card h-100">
+            <div class="cert-img-wrapper">
+              <img :src="cert.img"
+                   alt="Certificate Image"
+                   :alt="'Certificate: ' + cert.title"
+                   :title="'Certificate: ' + cert.title"
+                   title="Certificate Image"
+                   class="cert-img" />
+              <span class="cert-category-overlay">{{ cert.category }}</span>
+            </div>
+            <div class="cert-body">
+              <h6 class="cert-title mb-1">{{ cert.title }}</h6>
+              <p class="small text-muted mb-2">{{ cert.issuer }}</p>
+              <p class="small text-muted mb-0">
+                <i class="bi bi-calendar3 me-1" aria-hidden="true"></i>{{ cert.date }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer-section text-center py-4">
+    <p class="mb-1 small text-muted">{{ name }}</p>
+    <div class="d-flex justify-content-center gap-3 mt-2">
+      <a href="https://github.com/username" class="social-link" aria-label="GitHub profile" title="GitHub profile">
+        <i class="bi bi-github" aria-hidden="true"></i>
+        <span class="visually-hidden">GitHub</span>
+      </a>
+      <a href="https://linkedin.com/in/username" class="social-link" aria-label="LinkedIn profile" title="LinkedIn profile">
+        <i class="bi bi-linkedin" aria-hidden="true"></i>
+        <span class="visually-hidden">LinkedIn</span>
+      </a>
+      <a href="https://instagram.com/username" class="social-link" aria-label="Instagram profile" title="Instagram profile">
+        <i class="bi bi-instagram" aria-hidden="true"></i>
+        <span class="visually-hidden">Instagram</span>
+      </a>
+    </div>
+  </footer>
+
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Vue 3 -->
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+<script>
+  const { createApp } = Vue;
+
+  createApp({
+    data() {
+      return {
+        name: 'Jen Agresia Misti',
+        title: 'Laboratory Assistant & Tech Enthusiast',
+        heroDesc: 'An Information Systems student passionate about technology and data. I believe that the learning process is the key to growth.',
+
+        navLinks: [
+          { href: '#home',         label: 'Home' },
+          { href: '#about',        label: 'About Me' },
+          { href: '#certificates', label: 'Certificates' },
+        ],
+
+        aboutDesc: 'I am someone with a deep interest in technology and data development. I enjoy the learning process, exploring new tools, and developing both technical and leadership skills through various academic and organizational activities.',
+
+        skills: [
+          { name: 'Communication',   level: 85 },
+          { name: 'Leadership',      level: 90 },
+          { name: 'Problem Solving', level: 85 },
+        ],
+
+        experiences: [
+          {
+            role: 'Laboratory Assistant – Introduction to IT',
+            company: 'Universitas Mulawarman',
+            period: '2025',
+            desc: 'Taught the use of Word, Excel, Canva, and AI tools for students academic needs.',
+          },
+          {
+            role: 'Laboratory Assistant Coordinator – Database Concepts',
+            company: 'Universitas Mulawarman',
+            period: '2026 – Present',
+            desc: 'Teaching and coordinating database lab sessions focused on ERD design and SQL development.',
+          },
+          {
+            role: 'Awardee – Sobat Bumi Pertamina Scholarship',
+            company: 'Pertamina Foundation',
+            period: '2025 – Present',
+            desc: 'Merit-based scholarship awarded for academic achievement and social contribution.',
+          },
+          {
+            role: 'Coordinator – Desa Energi Berdikari Sobat Bumi Samarinda',
+            company: 'Pertamina Foundation',
+            period: '2026 – Present',
+            desc: 'Leading a community empowerment program focused on sustainable energy.',
+          },
+          {
+            role: 'Staff – Professional Skill and Development',
+            company: 'Information System Association (INFORSA)',
+            period: '2024 – 2025',
+            desc: 'Contributed to developing soft skills and professional competencies through organizational programs.',
+          },
+          {
+            role: 'Event Coordinator & Committee Chair – 6 Campus Events',
+            company: 'Information System Association (INFORSA)',
+            period: '2024 – 2025',
+            desc: 'Managed seminars, national webinars, guest lectures, and IT workshops.',
+          },
+        ],
+
+        certificates: [
+          {
+            title: 'Data Science Tools Training',
+            issuer: 'Dicoding Indonesia',
+            date: 'February 2026',
+            category: 'Data Science',
+            img: 'aset/dicoding.png',
+          },
+          {
+            title: 'Public Lecture Committee Chair',
+            issuer: 'Universitas Mulawarman',
+            date: 'December 2025',
+            category: 'Organizational Experience',
+            img: 'aset/KC.png',
+          },
+          {
+            title: 'Staff – PSD Department',
+            issuer: 'INFORSA',
+            date: '2025',
+            category: 'Organizational Experience',
+            img: 'aset/staff.png',
+          },
+        ],
+      };
+    },
+  }).mount('#app');
+</script>
+
+</body>
+</html>

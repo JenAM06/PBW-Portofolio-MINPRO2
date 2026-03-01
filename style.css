@@ -1,0 +1,351 @@
+/* ============================================================
+   PORTFOLIO WEBSITE - style.css
+   Tema: Sage Green & White — Natural Professional
+   ============================================================ */
+
+/* ==================== ROOT VARIABLES ==================== */
+:root {
+  --accent:        #4a7c59;       /* sage green utama */
+  --accent-light:  #edf4f0;       /* sage green sangat muda */
+  --accent-dark:   #355c42;       /* sage green tua */
+  --text-dark:     #1c2b22;       /* hijau-hitam gelap */
+  --text-muted:    #6b7f72;       /* abu kehijauan */
+  --bg-white:      #ffffff;
+  --bg-light:      #f5f8f6;       /* putih dengan sentuhan hijau */
+  --border:        #d6e4da;       /* border hijau soft */
+  --radius:        12px;
+  --shadow-sm:     0 1px 3px rgba(74,124,89,.08);
+  --shadow-md:     0 4px 16px rgba(74,124,89,.12);
+  --font-display:  'Playfair Display', serif;
+  --font-body:     'DM Sans', sans-serif;
+}
+
+/* ==================== BASE ==================== */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  color: var(--text-dark);
+  background-color: var(--bg-white);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* ==================== UTILITIES ==================== */
+.letter-spacing { letter-spacing: .12em; }
+.section-padding { padding: 96px 0; }
+.bg-light-custom { background-color: var(--bg-light); }
+
+/* ==================== NAVBAR ==================== */
+.navbar {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+  transition: box-shadow .3s;
+}
+
+.navbar-brand {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: var(--text-dark) !important;
+  letter-spacing: .01em;
+}
+
+.navbar-brand span { color: var(--accent); }
+
+.nav-link-custom {
+  font-size: .9rem;
+  font-weight: 500;
+  color: var(--text-muted) !important;
+  padding: 6px 14px !important;
+  border-radius: 8px;
+  transition: color .25s, background .25s;
+}
+
+.nav-link-custom:hover {
+  color: var(--accent) !important;
+  background: var(--accent-light);
+}
+
+/* ==================== HERO ==================== */
+.hero-section {
+  min-height: 100vh;
+  padding-top: 90px;
+  background: var(--bg-white);
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  color: var(--text-dark);
+  line-height: 1.15;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--accent);
+}
+
+.hero-desc {
+  font-size: .97rem;
+  max-width: 460px;
+  line-height: 1.8;
+  text-align: justify;
+}
+
+/* Foto profil */
+.hero-img-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.hero-img-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: -12px;
+  border-radius: 50%;
+  border: 2px dashed #a8c5b0;
+  animation: spin 18s linear infinite;
+}
+
+.hero-img-wrapper::after {
+  content: '';
+  position: absolute;
+  inset: -24px;
+  border-radius: 50%;
+  border: 2px solid #edf4f0;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.hero-img {
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 6px solid var(--bg-white);
+  box-shadow: var(--shadow-md);
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .hero-img { width: 220px; height: 220px; }
+}
+
+/* Buttons */
+.btn-primary-custom {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: .9rem;
+  transition: background .25s, transform .2s;
+  text-decoration: none;
+}
+.btn-primary-custom:hover {
+  background: var(--accent-dark);
+  transform: translateY(-2px);
+  color: #fff;
+}
+
+.btn-outline-custom {
+  background: transparent;
+  color: var(--accent);
+  border: 1.5px solid var(--accent);
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: .9rem;
+  transition: all .25s;
+  text-decoration: none;
+}
+.btn-outline-custom:hover {
+  background: var(--accent-light);
+  transform: translateY(-2px);
+  color: var(--accent-dark);
+}
+
+/* ==================== SECTION HEADER ==================== */
+.section-label { letter-spacing: .12em; font-size: .78rem; }
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  color: var(--text-dark);
+  margin-bottom: 12px;
+}
+
+.title-underline {
+  width: 48px;
+  height: 3px;
+  background: var(--accent);
+  border-radius: 99px;
+  margin-top: 12px;
+}
+
+/* ==================== ABOUT - SKILLS ==================== */
+.progress-custom {
+  height: 8px;
+  background: #d6e4da;
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.progress-bar-custom {
+  background: var(--accent);
+  border-radius: 99px;
+  transition: width 1.2s ease;
+}
+
+/* Personal info */
+.personal-label { font-size: .8rem; color: var(--text-muted); }
+
+.lh-lg { text-align: justify; }
+
+/* ==================== EXPERIENCE SCROLLABLE ==================== */
+.experience-scroll {
+  max-height: 380px;
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+.experience-scroll::-webkit-scrollbar {
+  width: 5px;
+}
+
+.experience-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.experience-scroll::-webkit-scrollbar-thumb {
+  background: #a8c5b0;
+  border-radius: 99px;
+}
+
+/* ==================== EXPERIENCE CARDS ==================== */
+.experience-card {
+  background: var(--bg-white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: box-shadow .25s;
+}
+.experience-card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.badge-period {
+  background: var(--accent-light);
+  color: var(--accent);
+  font-size: .73rem;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 99px;
+  white-space: nowrap;
+}
+
+/* ==================== CERTIFICATES ==================== */
+.cert-card {
+  background: var(--bg-white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: box-shadow .3s, transform .3s;
+  display: flex;
+  flex-direction: column;
+}
+
+.cert-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
+}
+
+.cert-img-wrapper {
+  position: relative;
+  width: 100%;
+  height: 260px;
+  overflow: hidden;
+  background-color: #edf4f0;
+}
+
+.cert-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transition: transform .4s ease;
+}
+
+.cert-card:hover .cert-img {
+  transform: scale(1.05);
+}
+
+.cert-category-overlay {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  font-size: .72rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  background: rgba(255,255,255,0.92);
+  padding: 3px 10px;
+  border-radius: 99px;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
+.cert-body {
+  padding: 18px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.cert-title {
+  font-size: .97rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.btn-cert {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  font-size: .85rem;
+  font-weight: 500;
+  color: var(--accent);
+  text-decoration: none;
+  transition: gap .2s, color .2s;
+  gap: 2px;
+}
+.btn-cert:hover { color: var(--accent-dark); gap: 6px; }
+
+/* ==================== FOOTER ==================== */
+.footer-section {
+  border-top: 1px solid var(--border);
+  background: var(--bg-light);
+}
+
+.social-link {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  transition: color .2s, transform .2s;
+  text-decoration: none;
+  display: inline-block;
+}
+.social-link:hover {
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 576px) {
+  .section-padding { padding: 64px 0; }
+  .hero-section { padding-top: 80px; }
+}
