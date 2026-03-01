@@ -11,19 +11,19 @@ Portfolio website pribadi. Menampilkan informasi profil, skill, pengalaman, dan 
 
 ## Daftar Isi 𓇼 ⋆.˚ 𓆉 𓆝 𓆡⋆.˚ 𓇼
 
-- [Struktur File](#-struktur-file)
-- [Teknologi yang Digunakan](#-teknologi-yang-digunakan)
-- [Arsitektur](#️-arsitektur)
-- [Alur Kerja](#️-alur-kerja)
-- [Fitur Utama](#-fitur-utama)
-- [Tampilan & Fitur](#-tampilan--fitur)
+- [Struktur File](#struktur-file)
+- [Teknologi yang Digunakan](#teknologi-yang-digunakan)
+- [Arsitektur](#️arsitektur)
+- [Alur Kerja](#️alur-kerja)
+- [Fitur Utama](#fitur-utama)
+- [Tampilan & Fitur](#tampilan--fitur)
   - [1. Navbar](#1-navbar)
-  - [2. Hero / Home](#2-hero--home)
+  - [2. Hero / Home](#2-hero-home)
   - [3. About Me](#3-about-me)
   - [4. Certificates](#4-certificates)
   - [5. Footer](#5-footer)
-- [CSS Global](#-css-global)
-- [Vue.js Data & Konfigurasi](#️-vuejs-data--konfigurasi)
+- [CSS Global](#css-global)
+- [Vue.js Data & Konfigurasi](#️vuejs-data--konfigurasi)
   
 
 ---
