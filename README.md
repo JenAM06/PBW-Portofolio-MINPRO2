@@ -71,9 +71,9 @@ index.html
 ---
 
 ## Alur kerja:
-1. **Data diisi** di `data()` Vue — nama, skill, pengalaman, sertifikat
+1. **Data diisi** di `data()` Vue seperti nama, skill, pengalaman, sertifikat
 2. **HTML membaca data** menggunakan Vue template syntax (`{{ }}`, `v-for`, `:style`, dll)
-3. **CSS mengatur tampilan** — Bootstrap menangani layout, `style.css` menangani desain custom
+3. **CSS mengatur tampilan**, Bootstrap menangani layout, `style.css` menangani desain custom
 
 Dengan pendekatan ini, untuk memperbarui isi portfolio cukup edit bagian `data()` tanpa menyentuh struktur HTML maupun CSS sama sekali.
 
