@@ -39,7 +39,10 @@ portfolio/
 
 Navigasi tetap (fixed-top) yang transparan dengan efek shadow, berisi nama dan link ke setiap section. Navbar selalu terlihat di bagian atas halaman meski pengunjung scroll ke bawah. Di layar besar, link navigasi tampil berjajar. Di HP atau tablet, menu disembunyikan dan bisa dibuka lewat tombol ikon garis tiga (hamburger).
 
-<img width="1871" height="128" alt="image" src="https://github.com/user-attachments/assets/899f77a5-1ad8-41e7-b3de-6cdc9a54148c" />
+| Desktop Navbar | <img src="https://github.com/user-attachments/assets/899f77a5-1ad8-41e7-b3de-6cdc9a54148c" width="800" /> |
+|---------------|----------------------------------------|
+| Mobile Navbar | <img src="https://github.com/user-attachments/assets/66dbb430-db91-4be2-b3c2-b2de5fb2bfcc" width="450"/>|
+
 
 #### Fitur Utama
 - Selalu terlihat di atas saat halaman di-scroll
@@ -117,7 +120,7 @@ Halaman pertama yang dilihat saat membuka portfolio. Menampilkan foto profil, na
 
 | Desktop View | Mobile View |
 |--------------|------------|
-|<img src="https://github.com/user-attachments/assets/9486e199-966e-45c3-b312-51fda6cd2bba" width="500"/> |<img src= "https://github.com/user-attachments/assets/c21a8dd6-25d3-4ef0-8721-d0839ac68aaa" width="150" /> |
+|<img src="https://github.com/user-attachments/assets/79a65936-c06a-482e-bb18-282c33f695a8" width="500"/> |<img src= "https://github.com/user-attachments/assets/c21a8dd6-25d3-4ef0-8721-d0839ac68aaa" width="200" /> |
 
 #### Fitur Utama
 - Foto profil dengan hiasan dua lingkaran berputar di sekelilingnya
@@ -214,7 +217,7 @@ Section ini memperkenalkan diri lebih dalam. Berisi teks deskripsi, bar kemampua
 
 | Desktop View | Mobile View |
 |--------------|------------|
-|<img src="https://github.com/user-attachments/assets/5f846964-d690-4192-a8ee-6241e175ebea" width="500"/> |<img src="https://github.com/user-attachments/assets/6376a2be-4444-4acf-b64b-6ead05016aed" width="150" /> |
+|<img src="https://github.com/user-attachments/assets/5f846964-d690-4192-a8ee-6241e175ebea" width="500"/> |<img src="https://github.com/user-attachments/assets/6376a2be-4444-4acf-b64b-6ead05016aed" width="200" /> |
 
 #### Fitur Utama
 - Bar skill dengan persentase yang bisa diubah langsung dari data
@@ -307,3 +310,335 @@ Section ini memperkenalkan diri lebih dalam. Berisi teks deskripsi, bar kemampua
 </details>
 
 ---
+
+### 4. Certificates
+
+Menampilkan koleksi sertifikat yang telah diraih dalam bentuk kartu bergambar. Setiap kartu menunjukkan foto sertifikat, kategori, nama sertifikat, penerbit, dan tanggal terbit. Saat kartu di-hover, ada efek naik dan gambar sedikit membesar.
+
+| Desktop View | Mobile View |
+|--------------|------------|
+|<img src="https://github.com/user-attachments/assets/5fcb08ed-a116-427c-a288-bd7271033441" width="500"/> |<img src="https://github.com/user-attachments/assets/e9ba0260-8437-47d0-9145-e50e4d4af0a8" width="200" /> 
+
+#### Fitur Utama
+- Tampilan kartu berjejer rapi, otomatis menyesuaikan jumlah kolom di tiap ukuran layar
+- Setiap kartu menampilkan gambar, kategori, judul, penerbit, dan tanggal
+- Efek hover pada kartu: terangkat dan gambar sedikit zoom
+- Cukup tambah data di array `certificates` untuk menambah kartu baru
+
+<details>
+<summary>Penjelasan Kode HTML & CSS</summary>
+
+**HTML:**
+
+```html
+<div class="row g-4">
+    <div class="col-md-6 col-lg-4" v-for="cert in certificates" :key="cert.title">
+        <div class="cert-card h-100">
+            <div class="cert-img-wrapper">
+              <img :src="cert.img"
+                   alt="Certificate Image"
+                   :alt="'Certificate: ' + cert.title"
+                   :title="'Certificate: ' + cert.title"
+                   title="Certificate Image"
+                   class="cert-img" />
+              <span class="cert-category-overlay">{{ cert.category }}</span>
+            </div>
+            <div class="cert-body">
+              <h6 class="cert-title mb-1">{{ cert.title }}</h6>
+              <p class="small text-muted mb-2">{{ cert.issuer }}</p>
+              <p class="small text-muted mb-0">
+                <i class="bi bi-calendar3 me-1" aria-hidden="true"></i>{{ cert.date }}
+              </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+```
+
+- `col-md-6 col-lg-4` → layout responsif: 1 kolom di mobile, 2 kolom di tablet, 3 kolom di desktop.
+- `v-for="cert in certificates"` → merender satu kartu untuk setiap objek di array `certificates`.
+- `:src="cert.img"` / `:alt` / `:title` → semua atribut gambar diisi dinamis dari data Vue.
+- `cert-category-overlay` → badge kategori yang mengambang di pojok kiri atas gambar.
+- `h-100` → semua kartu dalam satu baris memiliki tinggi yang sama.
+- `bi bi-calendar3` → ikon kalender dari Bootstrap Icons.
+
+**CSS:**
+
+```css
+.cert-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
+}
+.cert-img {
+  object-fit: cover;
+  object-position: center top;
+  transition: transform .4s ease;
+}
+.cert-card:hover .cert-img { transform: scale(1.05); }
+.cert-category-overlay {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(4px);
+  border-radius: 99px;
+}
+.cert-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+```
+
+- `translateY(-4px)` saat hover → efek kartu terangkat.
+- `object-position: center top` → prioritaskan bagian atas gambar agar judul sertifikat tidak terpotong.
+- `scale(1.05)` → gambar sedikit zoom saat kartu di-hover.
+- `backdrop-filter: blur(4px)` → efek frosted glass pada badge kategori.
+- `flex: 1` pada `.cert-body` → konten kartu terdistribusi rapi meski panjang teks berbeda.
+
+</details>
+
+---
+
+## 5. Footer
+
+Bagian paling bawah halaman yang menampilkan nama dan tiga ikon sosial media. Sederhana dan bersih, dengan warna hijau sage di seluruh halaman.
+
+| Desktop Footer | <img src="https://github.com/user-attachments/assets/d42bcac4-7783-4f39-af2d-d4c9ed7aa03d" width="800" /> |
+|---------------|----------------------------------------|
+| Mobile Footer | <img src="https://github.com/user-attachments/assets/10571e8d-235f-4d8e-9b3e-b342943d6766" width="450"/>|
+
+#### Fitur Utama
+- Menampilkan nama pemilik portfolio
+- Tiga ikon sosial media: GitHub, LinkedIn, dan Instagram
+- Ikon berubah warna dan sedikit naik saat di-hover
+
+<details>
+<summary>Penjelasan Kode HTML & CSS</summary>
+
+**HTML:**
+
+```html
+  <footer class="footer-section text-center py-4">
+    <p class="mb-1 small text-muted">{{ name }}</p>
+    <div class="d-flex justify-content-center gap-3 mt-2">
+      <a href="https://github.com/JenAM06" class="social-link" aria-label="GitHub profile" title="GitHub profile">
+        <i class="bi bi-github" aria-hidden="true"></i>
+        <span class="visually-hidden">GitHub</span>
+      </a>
+      <a href="https://linkedin.com/in/username" class="social-link" aria-label="LinkedIn profile" title="LinkedIn profile">
+        <i class="bi bi-linkedin" aria-hidden="true"></i>
+        <span class="visually-hidden">LinkedIn</span>
+      </a>
+      <a href="https://www.instagram.com/agresia_jen/" class="social-link" aria-label="Instagram profile" title="Instagram profile">
+        <i class="bi bi-instagram" aria-hidden="true"></i>
+        <span class="visually-hidden">Instagram</span>
+      </a>
+    </div>
+  </footer>
+
+```
+
+- `bi bi-github` / `bi-linkedin` / `bi-instagram` → ikon sosial media dari Bootstrap Icons.
+- `aria-label` → teks deskriptif untuk screen reader karena link hanya berisi ikon tanpa teks terlihat.
+- `visually-hidden` → teks "GitHub", "LinkedIn", dst. hanya terbaca screen reader, tidak tampil secara visual.
+- `{{ name }}` → nama pemilik portfolio ditampilkan dari data Vue.
+
+**CSS:**
+
+```css
+.footer-section {
+  border-top: 1px solid var(--border);
+  background: var(--bg-light);
+}
+.social-link {
+  display: inline-block;
+  transition: color .2s, transform .2s;
+}
+.social-link:hover {
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+```
+
+- `border-top` → garis tipis pemisah footer dari section di atasnya.
+- `display: inline-block` → diperlukan agar `transform` bisa bekerja pada elemen `<a>` yang secara default inline.
+- `translateY(-2px)` saat hover → ikon sedikit naik untuk efek interaktif.
+
+</details>
+
+## CSS 
+
+**Variabel `:root`:**
+
+```css
+:root {
+  --accent:        #4a7c59;
+  --accent-light:  #edf4f0;
+  --accent-dark:   #355c42;
+  --text-dark:     #1c2b22;
+  --text-muted:    #6b7f72;
+  --bg-white:      #ffffff;
+  --bg-light:      #f5f8f6;
+  --border:        #d6e4da;
+  --radius:        12px;
+  --shadow-sm:     0 1px 3px rgba(74,124,89,.08);
+  --shadow-md:     0 4px 16px rgba(74,124,89,.12);
+  --font-display:  'Playfair Display', serif;
+  --font-body:     'DM Sans', sans-serif;
+}
+```
+
+Semua warna, font, radius, dan shadow didefinisikan di `:root` sebagai CSS Custom Properties. Keuntungannya: untuk mengubah tema warna cukup edit di satu tempat saja.
+
+<details>
+<summary>Penjelasan Base Style</summary>
+
+**Base Style:**
+
+```css
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  color: var(--text-dark);
+  background-color: var(--bg-white);
+  font-size: 15px;
+  line-height: 1.6;
+}
+```
+
+- `box-sizing: border-box` → padding dan border tidak menambah lebar elemen, layout lebih mudah diprediksi.
+- `scroll-behavior: smooth` → navigasi anchor link berjalan dengan animasi scroll halus.
+
+**Responsive:**
+
+```css
+@media (max-width: 768px) {
+  .hero-img { width: 220px; height: 220px; }
+}
+@media (max-width: 576px) {
+  .section-padding { padding: 64px 0; }
+  .hero-section { padding-top: 80px; }
+}
+```
+
+Breakpoint kustom untuk tampilan rapi di layar tablet dan mobile.
+
+</details>
+
+---
+
+## Vue.js Data & Konfigurasi
+
+Semua konten yang tampil di halaman diambil dari satu tempat — bagian `data()` di dalam script Vue. Untuk mengubah isi portfolio, cukup edit nilai-nilai di sini tanpa perlu menyentuh struktur HTML sama sekali.
+
+<details>
+<summary>Penjelasan Kode Vue Data</summary>
+
+**Inisialisasi Vue & CDN:**
+
+```html
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Vue 3 -->
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+```
+
+- Kedua library dimuat via CDN, tidak perlu instalasi apapun.
+- Bootstrap JS diperlukan untuk fitur collapse (hamburger menu).
+- Vue 3 dimuat sebagai `vue.global.js` sehingga bisa langsung dipakai di browser tanpa build tools.
+
+**Struktur Utama Vue:**
+
+```js
+const { createApp } = Vue;
+
+createApp({
+  data() {
+    return {
+      // semua data konten di sini
+    };
+  },
+}).mount('#app');
+```
+
+- `createApp()` → membuat instance Vue baru.
+- `data()` → fungsi yang mengembalikan semua data reaktif yang dipakai di template HTML.
+- `.mount('#app')` → menghubungkan Vue ke elemen `<div id="app">` di HTML, sehingga semua konten di dalamnya bisa menggunakan data Vue.
+
+**Data Konten:**
+
+```js
+name: 'Jen Agresia Misti',
+title: 'Laboratory Assistant & Tech Enthusiast',
+heroDesc: 'An Information Systems student passionate about technology and data. I believe that the learning process is the key to growth.',
+aboutDesc: 'I am someone with a deep interest in technology and data development...',
+```
+
+- Variabel teks yang ditampilkan di Hero dan About. Untuk mengubah nama, jabatan, atau deskripsi cukup edit nilai string di sini.
+
+**Data Navigasi:**
+
+```js
+navLinks: [
+  { href: '#home',         label: 'Home' },
+  { href: '#about',        label: 'About Me' },
+  { href: '#certificates', label: 'Certificates' },
+],
+```
+
+- Array objek yang menentukan link apa saja yang muncul di navbar. Untuk menambah menu baru, cukup tambah satu objek baru dengan `href` dan `label`.
+
+**Data Skill:**
+
+```js
+skills: [
+  { name: 'Communication',   level: 85 },
+  { name: 'Leadership',      level: 90 },
+  { name: 'Problem Solving', level: 85 },
+],
+```
+
+- Setiap objek menghasilkan satu baris progress bar di section About. `level` adalah nilai persentase (0–100) yang menentukan panjang bar.
+
+**Data Pengalaman:**
+
+```js
+experiences: [
+  {
+    role: 'Laboratory Assistant – Introduction to IT',
+    company: 'Universitas Mulawarman',
+    period: '2025',
+    desc: 'Taught the use of Word, Excel, Canva, and AI tools for students academic needs.',
+  },
+  // ...
+],
+```
+
+- Setiap objek menghasilkan satu kartu di daftar Experience. Tambah objek baru untuk menambah entri pengalaman.
+
+**Data Sertifikat:**
+
+```js
+certificates: [
+  {
+    title: 'Data Science Tools Training',
+    issuer: 'Dicoding Indonesia',
+    date: 'February 2026',
+    category: 'Data Science',
+    img: 'aset/dicoding.png',
+  },
+  // ...
+],
+```
+
+- Setiap objek menghasilkan satu kartu di section Certificates. `img` adalah path ke file gambar sertifikat di folder `aset/`.
+
+</details>
+
+---
+
