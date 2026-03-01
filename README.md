@@ -1,20 +1,30 @@
 # Portfolio
 
 Portfolio website pribadi. Menampilkan informasi profil, skill, pengalaman, dan sertifikat.
+
+## 🔗 Live Demo
+👉 https://jenam06.github.io/PBW-Portofolio/
+
 > Jen Agresia Misti | 2409116007 | A'24 | MINPRO 1
 
 ---
 
-## Teknologi yang Digunakan
+## 📋 Daftar Isi
 
-| Teknologi | Keterangan |
-|---|---|
-| **HTML5** | Struktur dan markup halaman |
-| **CSS3** | Custom styling, animasi, dan variabel warna |
-| **Bootstrap 5.3** | Layout grid, navbar, komponen responsif |
-| **Bootstrap Icons 1.10.5** | Icon sosial media dan UI |
-| **Vue.js 3** | Reaktivitas data, rendering dinamis |
-| **Google Fonts** | Font `Playfair Display` dan `DM Sans` |
+- [Struktur File](#-struktur-file)
+- [Teknologi yang Digunakan](#-teknologi-yang-digunakan)
+- [Arsitektur](#️-arsitektur)
+- [Alur Kerja](#️-alur-kerja)
+- [Fitur Utama](#-fitur-utama)
+- [Tampilan & Fitur](#-tampilan--fitur)
+  - [1. Navbar](#1-navbar)
+  - [2. Hero / Home](#2-hero--home)
+  - [3. About Me](#3-about-me)
+  - [4. Certificates](#4-certificates)
+  - [5. Footer](#5-footer)
+- [CSS Global](#-css-global)
+- [Vue.js Data & Konfigurasi](#️-vuejs-data--konfigurasi)
+  
 
 ---
 
@@ -30,6 +40,52 @@ portfolio/
     ├── KC.png
     └── staff.png
 ```
+---
+
+## Teknologi yang Digunakan
+
+| Teknologi | Keterangan |
+|---|---|
+| **HTML5** | Struktur dan markup halaman |
+| **CSS3** | Custom styling, animasi, dan variabel warna |
+| **Bootstrap 5.3** | Layout grid, navbar, komponen responsif |
+| **Bootstrap Icons 1.10.5** | Icon sosial media dan UI |
+| **Vue.js 3** | Reaktivitas data, rendering dinamis |
+| **Google Fonts** | Font `Playfair Display` dan `DM Sans` |
+
+---
+
+
+## Arsitektur
+
+Project ini adalah single-file portfolio tanpa build tools. Ketiga bagian utama bekerja bersama dengan alur yang sederhana:
+
+```
+index.html
+├── Vue.js (data & reaktivitas)
+│   ├── data()          → sumber semua konten (nama, skill, pengalaman, sertifikat)
+│   └── .mount('#app')  → menghubungkan Vue ke elemen HTML
+├── Bootstrap 5         → layout grid, navbar, komponen UI responsif
+└── style.css           → tampilan custom, animasi, dan variabel warna
+```
+---
+
+## Alur kerja:
+1. **Data diisi** di `data()` Vue — nama, skill, pengalaman, sertifikat
+2. **HTML membaca data** menggunakan Vue template syntax (`{{ }}`, `v-for`, `:style`, dll)
+3. **CSS mengatur tampilan** — Bootstrap menangani layout, `style.css` menangani desain custom
+
+Dengan pendekatan ini, untuk memperbarui isi portfolio cukup edit bagian `data()` tanpa menyentuh struktur HTML maupun CSS sama sekali.
+
+---
+
+## Fitur Utama
+
+- Responsive design (mobile & desktop)
+- Dynamic rendering menggunakan Vue.js
+- Scrollable experience section
+- Animated hero image
+- Custom theme menggunakan CSS variables
 
 ---
 
