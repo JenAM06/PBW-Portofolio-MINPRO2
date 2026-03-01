@@ -9,7 +9,7 @@ Portfolio website pribadi. Menampilkan informasi profil, skill, pengalaman, dan 
 
 ---
 
-## 📋 Daftar Isi
+## Daftar Isi 𓇼 ⋆.˚ 𓆉 𓆝 𓆡⋆.˚ 𓇼
 
 - [Struktur File](#-struktur-file)
 - [Teknologi yang Digunakan](#-teknologi-yang-digunakan)
