@@ -1,18 +1,15 @@
-/* ============================================================
-   PORTFOLIO WEBSITE - style.css
-   Tema: Sage Green & White — Natural Professional
-   ============================================================ */
+
 
 /* ==================== ROOT VARIABLES ==================== */
 :root {
-  --accent:        #4a7c59;       /* sage green utama */
-  --accent-light:  #edf4f0;       /* sage green sangat muda */
-  --accent-dark:   #355c42;       /* sage green tua */
-  --text-dark:     #1c2b22;       /* hijau-hitam gelap */
-  --text-muted:    #6b7f72;       /* abu kehijauan */
+  --accent:        #4a7c59;       
+  --accent-light:  #edf4f0;       
+  --accent-dark:   #355c42;       
+  --text-dark:     #1c2b22;      
+  --text-muted:    #6b7f72;       
   --bg-white:      #ffffff;
-  --bg-light:      #f5f8f6;       /* putih dengan sentuhan hijau */
-  --border:        #d6e4da;       /* border hijau soft */
+  --bg-light:      #f5f8f6;       
+  --border:        #d6e4da;      
   --radius:        12px;
   --shadow-sm:     0 1px 3px rgba(74,124,89,.08);
   --shadow-md:     0 4px 16px rgba(74,124,89,.12);
