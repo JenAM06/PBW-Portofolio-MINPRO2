@@ -97,7 +97,7 @@ index.php
 
 **1. Letakkan file di folder Laragon:**
 ```
-C:\laragon\www\minpro1\
+C:\laragon\www\minpro2\
 ├── index.php
 ├── koneksi.php
 ├── style.css
