@@ -574,14 +574,6 @@ Bagian paling bawah halaman yang menampilkan nama dan tiga ikon sosial media.
 - `display: inline-block` → diperlukan agar `transform` bisa bekerja pada elemen `<a>` yang secara default inline.
 - `translateY(-2px)` saat hover → ikon sedikit naik untuk efek interaktif.
 
-</details>
-
----
-
-## CSS
-
-`style.css` **tidak mengalami perubahan** dari versi sebelumnya.
-
 **Variabel `:root`:**
 ```css
 :root {
