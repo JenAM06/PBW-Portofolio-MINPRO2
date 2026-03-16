@@ -5,7 +5,7 @@ Portfolio website pribadi yang dinamis. Menampilkan informasi profil, skill, pen
 ## 🔗 Live Demo
 👉 https://jenam06.github.io/PBW-Portofolio/
 
-> Jen Agresia Misti | 2409116007 | A'24 | MINPRO 1
+> Jen Agresia Misti | 2409116007 | A'24 | MINPRO 2
 
 ---
 
@@ -31,7 +31,7 @@ Portfolio website pribadi yang dinamis. Menampilkan informasi profil, skill, pen
 ## Struktur File
 
 ```
-portfolio/
+MINPRO2/
 ├── index.php
 ├── koneksi.php
 ├── style.css
@@ -79,7 +79,7 @@ index.php
 
 ## Alur Kerja
 
-1. **Browser** membuka `http://localhost/minpro1`
+1. **Browser** membuka `http://localhost/minpro2`
 2. **Apache (Laragon)** meneruskan request ke `index.php`
 3. **`koneksi.php`** membuka koneksi ke database MySQL
 4. **PHP** menjalankan query `SELECT` ke tabel `skills`, `experiences`, dan `certificates`
@@ -105,14 +105,14 @@ C:\laragon\www\minpro1\
 ```
 
 **2. Import database:**
-- Pastikan Laragon sudah running (Apache & MySQL hijau)
+- Pastikan Laragon sudah running
 - Buka `http://localhost/phpmyadmin`
 - Login dengan username `root`, password kosong
 - Klik **Import** → pilih file `portfolio.sql` → klik **Execute**
 
 **3. Buka website:**
 ```
-http://localhost/minpro1
+http://localhost/minpro2
 ```
 
 ### Konfigurasi Database (`koneksi.php`)
@@ -208,7 +208,33 @@ Navigasi tetap (fixed-top) yang transparan dengan efek shadow, berisi nama dan l
 - `<?= htmlspecialchars($name) ?>` → menampilkan nama dari variabel PHP, `htmlspecialchars` mencegah XSS.
 - Link navigasi ditulis langsung di HTML karena bersifat statis (tidak perlu dari database).
 
-**CSS:** sama seperti versi sebelumnya, tidak ada perubahan.
+**CSS:**
+```css
+.navbar {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+  transition: box-shadow .3s;
+}
+.navbar-brand {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: var(--text-dark) !important;
+}
+.nav-link-custom {
+  color: var(--text-muted) !important;
+  padding: 6px 14px !important;
+  border-radius: 8px;
+  transition: color .25s, background .25s;
+}
+.nav-link-custom:hover {
+  color: var(--accent) !important;
+  background: var(--accent-light);
+}
+
+```
+- `border-bottom` menggunakan variabel `--border` dari `:root` untuk konsistensi warna.
+- Efek hover mengubah warna teks menjadi accent (sage green) dan memberi background soft.
+- `!important` digunakan untuk override warna default dari Bootstrap yang sudah terdefinisi.
 
 </details>
 
@@ -240,7 +266,46 @@ Halaman pertama yang dilihat saat membuka portfolio. Menampilkan foto profil, na
 
 - `$name`, `$title`, `$heroDesc` → variabel PHP statis yang didefinisikan langsung di `index.php` (bukan dari database karena data pribadi jarang berubah).
 
-**CSS:** sama seperti versi sebelumnya, tidak ada perubahan.
+**CSS:**
+
+```css
+.hero-section {
+  min-height: 100vh;
+  padding-top: 90px;
+}
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+}
+.hero-img-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: -12px;
+  border-radius: 50%;
+  border: 2px dashed #a8c5b0;
+  animation: spin 18s linear infinite;
+}
+.hero-img-wrapper::after {
+  content: '';
+  position: absolute;
+  inset: -24px;
+  border-radius: 50%;
+  border: 2px solid #edf4f0;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.hero-img {
+  border-radius: 50%;
+  object-fit: cover;
+  border: 6px solid var(--bg-white);
+  z-index: 1;
+}
+```
+
+- `min-height: 100vh` → hero selalu mengisi satu layar penuh; `padding-top: 90px` agar tidak tertutup navbar fixed.
+- `clamp(2.4rem, 5vw, 3.6rem)` → ukuran font judul responsif otomatis antara mobile dan desktop.
+- `::before` dan `::after` → dua pseudo-element yang membentuk lingkaran dekoratif di sekeliling foto.
+- `animation: spin 18s linear infinite` → lingkaran putus-putus (`::before`) berputar terus-menerus.
+- `z-index: 1` → memastikan foto tampil di atas kedua lingkaran dekoratif.
 
 </details>
 
@@ -325,7 +390,34 @@ while ($row = mysqli_fetch_assoc($expResult)) {
 - `(int)$skill['level']` → memastikan nilai level selalu berupa integer, bukan string.
 - Kolom `description` di database sesuai dengan nama kolom tabel (berbeda dari `desc` di versi Vue sebelumnya).
 
-**CSS:** sama seperti versi sebelumnya, tidak ada perubahan.
+**CSS:**
+
+```css
+.progress-bar-custom {
+  background: var(--accent);
+  transition: width 1.2s ease;
+}
+.experience-scroll {
+  max-height: 380px;
+  overflow-y: auto;
+}
+.experience-scroll::-webkit-scrollbar-thumb {
+  background: #a8c5b0;
+  border-radius: 99px;
+}
+.experience-card:hover { box-shadow: var(--shadow-md); }
+.badge-period {
+  background: var(--accent-light);
+  color: var(--accent);
+  border-radius: 99px;
+  white-space: nowrap;
+}
+```
+
+- `transition: width 1.2s ease` → animasi smooth saat progress bar "mengisi" dari kiri ke kanan.
+- `max-height` + `overflow-y: auto` → daftar experience bisa di-scroll tanpa memanjangkan halaman.
+- `::-webkit-scrollbar-thumb` → styling scrollbar custom agar sesuai palet warna sage green.
+- `white-space: nowrap` → teks periode tidak terpotong ke baris baru.
 
 </details>
 
@@ -386,7 +478,39 @@ while ($row = mysqli_fetch_assoc($certResult)) {
 - `$cert['img']` → path gambar diambil dari kolom `img` di tabel `certificates`.
 - PHP `foreach` menggantikan `v-for` dari Vue.
 
-**CSS:** sama seperti versi sebelumnya, tidak ada perubahan.
+**CSS:**
+
+```css
+.cert-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
+}
+.cert-img {
+  object-fit: cover;
+  object-position: center top;
+  transition: transform .4s ease;
+}
+.cert-card:hover .cert-img { transform: scale(1.05); }
+.cert-category-overlay {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(4px);
+  border-radius: 99px;
+}
+.cert-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+```
+
+- `translateY(-4px)` saat hover → efek kartu terangkat.
+- `object-position: center top` → prioritaskan bagian atas gambar agar judul sertifikat tidak terpotong.
+- `scale(1.05)` → gambar sedikit zoom saat kartu di-hover.
+- `backdrop-filter: blur(4px)` → efek frosted glass pada badge kategori.
+- `flex: 1` pada `.cert-body` → konten kartu terdistribusi rapi meski panjang teks berbeda.
 
 </details>
 
@@ -429,7 +553,26 @@ Bagian paling bawah halaman yang menampilkan nama dan tiga ikon sosial media.
 </footer>
 ```
 
-**CSS:** sama seperti versi sebelumnya, tidak ada perubahan.
+**CSS:**
+
+```css
+.footer-section {
+  border-top: 1px solid var(--border);
+  background: var(--bg-light);
+}
+.social-link {
+  display: inline-block;
+  transition: color .2s, transform .2s;
+}
+.social-link:hover {
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+```
+
+- `border-top` → garis tipis pemisah footer dari section di atasnya.
+- `display: inline-block` → diperlukan agar `transform` bisa bekerja pada elemen `<a>` yang secara default inline.
+- `translateY(-2px)` saat hover → ikon sedikit naik untuk efek interaktif.
 
 </details>
 
@@ -437,7 +580,7 @@ Bagian paling bawah halaman yang menampilkan nama dan tiga ikon sosial media.
 
 ## CSS
 
-`style.css` **tidak mengalami perubahan** dari versi sebelumnya. Semua styling, variabel warna, animasi, dan responsivitas tetap sama persis.
+`style.css` **tidak mengalami perubahan** dari versi sebelumnya.
 
 **Variabel `:root`:**
 ```css
@@ -459,5 +602,41 @@ Bagian paling bawah halaman yang menampilkan nama dan tiga ikon sosial media.
 ```
 
 Semua warna, font, radius, dan shadow didefinisikan di `:root` sebagai CSS Custom Properties. Untuk mengubah tema warna cukup edit di satu tempat saja.
+
+<details>
+<summary>Penjelasan Base Style</summary>
+
+**Base Style:**
+
+```css
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  color: var(--text-dark);
+  background-color: var(--bg-white);
+  font-size: 15px;
+  line-height: 1.6;
+}
+```
+
+- `box-sizing: border-box` → padding dan border tidak menambah lebar elemen, layout lebih mudah diprediksi.
+- `scroll-behavior: smooth` → navigasi anchor link berjalan dengan animasi scroll halus.
+
+**Responsive:**
+
+```css
+@media (max-width: 768px) {
+  .hero-img { width: 220px; height: 220px; }
+}
+@media (max-width: 576px) {
+  .section-padding { padding: 64px 0; }
+  .hero-section { padding-top: 80px; }
+}
+```
+
+Breakpoint kustom untuk tampilan rapi di layar tablet dan mobile.
+
+</details>
 
 ---
