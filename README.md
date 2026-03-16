@@ -118,9 +118,9 @@ http://localhost/minpro1
 ### Konfigurasi Database (`koneksi.php`)
 ```php
 $host = 'localhost';
-$user = 'root';       // default Laragon
-$pass = '';           // default Laragon (kosong)
-$db   = 'portfolio';  // nama database
+$user = 'root';     
+$pass = '';          
+$db   = 'portfolio';  
 ```
 
 ---
