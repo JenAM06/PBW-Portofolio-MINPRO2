@@ -86,8 +86,6 @@ index.php
 5. **PHP** merender HTML dengan data dari database menggunakan `foreach` dan `htmlspecialchars()`
 6. **Browser** menerima HTML yang sudah lengkap dan menampilkan halaman
 
-Dengan pendekatan ini, untuk memperbarui isi portfolio cukup ubah data langsung di database (via Adminer/phpMyAdmin) tanpa menyentuh kode sama sekali.
-
 ---
 
 ## Setup & Instalasi
@@ -108,7 +106,7 @@ C:\laragon\www\minpro1\
 
 **2. Import database:**
 - Pastikan Laragon sudah running (Apache & MySQL hijau)
-- Buka Adminer: `http://localhost/adminer`
+- Buka `http://localhost/phpmyadmin`
 - Login dengan username `root`, password kosong
 - Klik **Import** → pilih file `portfolio.sql` → klik **Execute**
 
